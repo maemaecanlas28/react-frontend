@@ -12,7 +12,7 @@ function NavBar() {
     const [activeItem, setActiveItem] = useState("Home")
 
     return (
-        <Menu>
+        <Menu className="nav">
             <Menu.Item
                 name='home'
                 active={activeItem === 'home'}
@@ -46,6 +46,12 @@ function NavBar() {
                 active={activeItem === 'profile'}
                 onClick={() => setActiveItem("Profile")}>
                 <Link to="/profile"> Profile </Link>
+            </Menu.Item>
+            <Menu.Item
+                name='login'
+                active={activeItem === 'login'}
+                onClick={() => setActiveItem("Login")}>
+                <Link to="/login"> Login </Link>
             </Menu.Item>
         </Menu>
     )

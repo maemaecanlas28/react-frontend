@@ -14,7 +14,7 @@ import Profile from './Components/Profile';
 
 function App() {
   return (
-    <div>
+    <div className='background-purple'>
       <Header />
       <NavBar />
       <AuthProvider>

@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Button, Form } from "semantic-ui-react"
 import { AuthContext } from "../Context/AuthContext";
-import { useNavigate, useLocation, Link } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Login() {
 

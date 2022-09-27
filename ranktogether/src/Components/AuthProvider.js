@@ -18,7 +18,7 @@ function AuthProvider ({ children }) {
             }),
         }
         // do fetch to call /login in api
-        return fetch("http://localhost:9292/login", configObj)
+        return fetch("/login", configObj)
             .then((r) => r.json())
             .then((data) => {
                 if (!data.error) {

@@ -8,8 +8,8 @@ function NavBar() {
 
     const navigate = useNavigate();
     let location = useLocation();
-    const auth = useContext(AuthContext);
     const [activeItem, setActiveItem] = useState("Home")
+    const { user } = useContext(AuthContext);
 
     return (
         <Menu className="nav">
@@ -47,12 +47,12 @@ function NavBar() {
                 onClick={() => setActiveItem("Profile")}>
                 <Link to="/profile"> Profile </Link>
             </Menu.Item>
-            <Menu.Item
+            {user ? (<Menu.Item
                 name='login'
                 active={activeItem === 'login'}
                 onClick={() => setActiveItem("Login")}>
                 <Link to="/login"> Login </Link>
-            </Menu.Item>
+            </Menu.Item>) : null }
         </Menu>
     )
 }

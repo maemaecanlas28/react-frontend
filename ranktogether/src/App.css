@@ -20,6 +20,39 @@
   height: 100%;
 }
 
+.username {
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
 .ui.nav {
   margin: 1rem 12px;
+}
+
+.ui.cards.board-scroll {
+  width: 100%;
+  overflow: auto;
+  flex-wrap: nowrap;
+  background: black;
+}
+
+.card-board-scroll {
+  flex: 0 0 auto;
+}
+
+.image-profile {
+  margin: 100px 20px 100px 60px;
+}
+
+.ui.medium.image.border-image {
+  border: solid black;
+}
+
+.header-margin {
+  margin: 60px 0 20px 80px;
+}
+
+.board-margin {
+  margin: 0 30px 0 30px;
 }

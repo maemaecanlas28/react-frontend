@@ -1,10 +1,21 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
 
-function AuthProvider ({ children }) {
-    let [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  
+function AuthProvider({ children }) {
+    let [user, setUser] = useState(null);
+
+    useEffect(() => {
+        fetch("/me")
+            .then((r) => r.json())
+            .then((data) => {
+                if (!data.errors) {
+                    setUser(data);
+                }
+            })
+            .catch((error) => { console.log(error) })
+    }, [])
+
     let signin = async (username, password) => {
 
         const configObj = {
@@ -23,25 +34,23 @@ function AuthProvider ({ children }) {
             .then((data) => {
                 if (!data.error) {
                     setUser(data);
-                    localStorage.setItem("user", JSON.stringify(data))
                 }
                 return data
             })
-            .catch((error) => {console.log(error)})
+            .catch((error) => { console.log(error) })
     };
-  
+
     let signout = async () => {
         return fetch("/logout", {
             method: "DELETE",
         }).then(() => {
             setUser(null);
-            localStorage.removeItem("user");
         })
     };
-  
-    let value = { user, signin, signout };
-  
+
+    let value = { user, signin, signout, setUser };
+
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-  }
+}
 
 export default AuthProvider

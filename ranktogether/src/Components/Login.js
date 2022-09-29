@@ -24,6 +24,7 @@ function Login() {
         else {
           navigate(from, { replace: true });
         }
+        console.log(data)
       })
   }
 
@@ -32,28 +33,30 @@ function Login() {
   }
 
   return (
-    <div className="login-form">
-      <Form onSubmit={handleSubmit}>
-        <Form.Field>
-          <label>Username</label>
-          <input
-            type="text"
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder='Username' />
-        </Form.Field>
-        <Form.Field>
-          <label>Password</label>
-          <input
-          type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder='Password' />
-        </Form.Field>
-        <Button type='submit'> Submit </Button>
-        <div>
-          <Button style={{ marginTop: "10px" }} onClick={handleSignup}>Sign-up</Button>
-        </div>
-      </Form>
+    <div className="login-padding">
+      <div className="login-form">
+        <Form onSubmit={handleSubmit}>
+          <Form.Field>
+            <label>Username</label>
+            <input
+              type="text"
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder='Username' />
+          </Form.Field>
+          <Form.Field>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder='Password' />
+          </Form.Field>
+          <Button secondary type='submit'> Login </Button>
+          <div>
+            <Button secondary style={{ marginTop: "10px" }} onClick={handleSignup}>Sign-up</Button>
+          </div>
+        </Form>
+      </div>
     </div>
   )
 }

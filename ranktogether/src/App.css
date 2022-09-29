@@ -1,18 +1,20 @@
 .login-form {
   width: 500px;
   height: auto;
-  border: 2px solid;
+  border: 3px solid;
   margin-left: auto;
   margin-right: auto;
   padding: 15px;
+  background-color: whitesmoke;
 }
 
 #main-header {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 25rem;
+  /* height: 25rem; */
   border-radius: 30%;
+  box-shadow: 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .background-purple {
@@ -28,25 +30,34 @@
 
 .ui.nav {
   margin: 1rem 12px;
+  border: solid black 3px
+  
 }
 
 .ui.cards.board-scroll {
   width: 100%;
   overflow: auto;
   flex-wrap: nowrap;
-  background: black;
+  border: solid black 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: whitesmoke;
 }
 
-.card-board-scroll {
+.ui.card.card-board-scroll {
   flex: 0 0 auto;
+  border: solid black 3px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .image-profile {
-  margin: 100px 20px 100px 60px;
+  position: relative;
+  margin: 50px 20px 100px 60px;
+  padding-bottom: 600px;
 }
 
 .ui.medium.image.border-image {
-  border: solid black;
+  border: solid black 5px;
+  margin-bottom: 20px;
 }
 
 .header-margin {
@@ -55,4 +66,27 @@
 
 .board-margin {
   margin: 0 30px 0 30px;
+}
+
+.home {
+  padding-bottom: 200px;
+}
+
+.create-form {
+  padding-bottom: 200px;
+}
+
+.logout-button {
+  position: absolute;
+  right: 10px;
+  top: -25px;
+}
+
+.about-me-button {
+  position: absolute;
+  left: 930px;
+}
+
+.login-padding {
+  padding-bottom: 500px;
 }

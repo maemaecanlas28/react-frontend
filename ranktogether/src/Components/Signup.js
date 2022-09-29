@@ -61,101 +61,103 @@ function Signup() {
             });
     }
     return (
-        <div className="login-form">
-            <Form onSubmit={handleSubmit} errors={errors.length == 0 ? "false" : "true"}>
-                <Form.Field>
-                    <label>Name</label>
-                    <input
-                        type="text"
-                        name="Name"
-                        placeholder='Name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)} />
-                </Form.Field>
-                <Form.Field>
-                    <label>Username</label>
-                    <input
-                        type="text"
-                        name="Username"
-                        placeholder='Username'
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)} />
-                </Form.Field>
-                <Form.Field>
-                    <label>Email</label>
-                    <input
-                        type="email"
-                        name="Email"
-                        placeholder='Email'
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} />
-                </Form.Field>
-                <Form.Field>
-                    <label>Password</label>
-                    <input
-                        type="password"
-                        name="Password"
-                        placeholder='Password'
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)} />
-                </Form.Field>
-                <Form.Field>
-                    <label>Re-enter Password</label>
-                    <input
-                        type="password"
-                        name="Password"
-                        placeholder='Re-enter your password'
-                        value={passwordConfirmation}
-                        onChange={(e) => setPasswordConfirmation(e.target.value)} />
-                </Form.Field>
-                <Form.Field>
-                    <label>Birthdate</label>
-                    <input
-                        type="date"
-                        name="Birthdate"
-                        placeholder='Enter your date of birth'
-                        value={birthdate}
-                        min="1922-01-01"
-                        max="2022-12-31"
-                        onChange={(e) => setBirthdate(e.target.value)} />
-                </Form.Field>
-                <FormField>
-                    <label>Upload your avatar!</label>
-                    <Form.Input
-                        fluid
-                        label="Avatar Chosen: "
-                        placeholder="Use button below to find your avatar"
-                        readOnly
-                        value={avatarImage?.name} />
-                    <Button
-                        as="label"
-                        htmlFor="file"
-                        type="button"
-                        animated="fade">
-                        <Button.Content visible>
-                            <Icon name="file" />
-                        </Button.Content>
-                        <Button.Content hidden>Choose an Avatar</Button.Content>
-                    </Button>
-                    <input
-                        type="file"
-                        id="file"
-                        hidden
-                        onChange={fileChange} />
-                </FormField>
-                <Dropdown
-                    placeholder='Gender'
-                    fluid selection options={genderOptions}
-                    onChange={(e, data) => handleSelectedGender(e, data)}
-                    value={gender} />
-                {errors.length !== 0 ? (
-                    <Message
-                        error
-                        header='Action Forbidden'
-                        content={errors} />
-                ) : null}
-                <Button style={{ marginTop: "20px" }} type='submit'>Submit</Button>
-            </Form>
+        <div className="login-padding">
+            <div className="login-form">
+                <Form onSubmit={handleSubmit} errors={errors.length == 0 ? "false" : "true"}>
+                    <Form.Field>
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            name="Name"
+                            placeholder='Name'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Username</label>
+                        <input
+                            type="text"
+                            name="Username"
+                            placeholder='Username'
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            name="Email"
+                            placeholder='Email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            name="Password"
+                            placeholder='Password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Re-enter Password</label>
+                        <input
+                            type="password"
+                            name="Password"
+                            placeholder='Re-enter your password'
+                            value={passwordConfirmation}
+                            onChange={(e) => setPasswordConfirmation(e.target.value)} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Birthdate</label>
+                        <input
+                            type="date"
+                            name="Birthdate"
+                            placeholder='Enter your date of birth'
+                            value={birthdate}
+                            min="1922-01-01"
+                            max="2022-12-31"
+                            onChange={(e) => setBirthdate(e.target.value)} />
+                    </Form.Field>
+                    <FormField>
+                        <label>Upload your avatar!</label>
+                        <Form.Input
+                            fluid
+                            label="Avatar Chosen: "
+                            placeholder="Use button below to find your avatar"
+                            readOnly
+                            value={avatarImage?.name} />
+                        <Button
+                            as="label"
+                            htmlFor="file"
+                            type="button"
+                            animated="fade">
+                            <Button.Content visible>
+                                <Icon name="file" />
+                            </Button.Content>
+                            <Button.Content hidden>Choose an Avatar</Button.Content>
+                        </Button>
+                        <input
+                            type="file"
+                            id="file"
+                            hidden
+                            onChange={fileChange} />
+                    </FormField>
+                    <Dropdown
+                        placeholder='Gender'
+                        fluid selection options={genderOptions}
+                        onChange={(e, data) => handleSelectedGender(e, data)}
+                        value={gender} />
+                    {errors.length !== 0 ? (
+                        <Message
+                            error
+                            header='Action Forbidden'
+                            content={errors} />
+                    ) : null}
+                    <Button secondary style={{ marginTop: "20px" }} type='submit'>Submit</Button>
+                </Form>
+            </div>
         </div>
     )
 }

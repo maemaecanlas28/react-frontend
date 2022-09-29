@@ -9,22 +9,28 @@ function Home({ boards }) {
     const boardLists = categories
         .map(category => {
             return (
-                <>
+                <div
+                    key={category}>
                     <div className="header-margin">
-                        <Header size='large'> {category} </Header>
+                        <Header size='large'>
+                            {category}
+                        </Header>
                     </div>
                     <div className="board-margin">
-                        <Card.Group className="board-scroll">
-                            <BoardList category={category} boards={boards} />
+                        <Card.Group
+                            className="board-scroll">
+                            <BoardList
+                                category={category}
+                                boards={boards} />
                         </Card.Group>
                     </div>
-                </>
+                </div>
             )
         })
 
 
     return (
-        <div>
+        <div className="home">
             {boardLists}
         </div>
     )

@@ -1,5 +1,5 @@
 import React from "react";
-import RankTogether from "../Images/RankTogether.gif"
+import RankTogether from "../Images/RankTogether.png"
 
 function Header() {
     return (

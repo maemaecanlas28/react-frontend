@@ -1,22 +1,171 @@
-import React, { useContext } from "react";
-import { Image, Header, Button } from "semantic-ui-react"
+import React, { useContext, useState, useEffect } from "react";
+import { Image, Header, Button, Item, Form, TextArea, Input, Modal, Icon } from "semantic-ui-react"
 import { AuthContext } from "../Context/AuthContext";
+import { useNavigate, useParams } from "react-router-dom"
 
-function Profile({ user }) {
+function Profile() {
 
     const auth = useContext(AuthContext);
+    const navigate = useNavigate();
+    const [isBioClicked, setIsBioClicked] = useState(false);
+    const [bio, setBio] = useState("");
+    const [user, setUser] = useState({});
+    const [open, setOpen] = useState(false)
+
+    const params = useParams();
+
+    // grabbing user date for the profile page
+    useEffect(() => {
+        if (auth.user?.id === parseInt(params.id)) {
+            setUser(auth.user)
+        }
+        else {
+            fetch(`/users/${params.id}`)
+                .then(data => data.json())
+                .then(data => {
+                    setUser(data)
+                })
+        }
+    }, [])
+
+    const addBio = (e) => {
+        e.preventDefault()
+        const patchReqObj = {
+            method: "PATCH",
+            headers: {
+                "Content-type": "application/json",
+                "Accepts": "application/json",
+            },
+            body: JSON.stringify({
+                "bio": bio,
+            })
+        }
+        fetch(`/users/${user.id}`, patchReqObj)
+            .then((res) => res.json())
+            .then((data) => {
+                setUser(data)
+                setOpen(!open)
+                auth.setUser(data)
+            })
+    }
+
+    function handleFollow(e) {
+        e.preventDefault()
+        const postReqObj = {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json",
+                "Accepts": "application/json",
+            },
+            body: JSON.stringify({
+                "user_id": user.id,
+            })
+        }
+        fetch("/follow", postReqObj)
+            .then(data => data.json())
+            .then(data => {
+                const userCopy = JSON.parse(JSON.stringify(auth.user))
+                userCopy.followings.push(data)
+                auth.setUser(userCopy)
+            })
+    }
+
+    function handleUnfollow(e) {
+        e.preventDefault()
+        const deleteReqObj = {
+            method: "DELETE",
+            headers: {
+                "Content-type": "application/json",
+                "Accepts": "application/json",
+            },
+            body: JSON.stringify({
+                "user_id": user.id,
+            })
+        }
+        fetch("/unfollow", deleteReqObj)
+            .then(() => {
+                const userCopy = JSON.parse(JSON.stringify(auth.user))
+                userCopy.followings = userCopy.followings.filter(data => {
+                    return user.id !== data.user_id
+                })
+                auth.setUser(userCopy)
+            })
+    }
+
+    function handleLogout() {
+        auth.signout().then(() => navigate("/"))
+    }
+
+    function showFollow() {
+        const followings = auth.user?.followings
+        const result = followings?.find(item => item.user_id === user.id)
+        return result == null
+    }
 
     return (
         <div className="image-profile">
-            <Header size='huge' textAlign="center">{auth.user.username}</Header>
-            <>{auth.user ? null
-                : (<div>
-                    <Button positive> 👉 Follow </Button>
-                    <Button negative> Unfollow </Button>
-                </div>)} </>
+            {auth.user?.id === user.id ?
+                (<Button
+                    secondary
+                    onClick={handleLogout}
+                    className="logout-button">
+                    Logout
+                </Button>) : null}
+            <Header
+                as="h1"
+                textAlign="center">
+                {user.username}
+            </Header>
             <Image
                 className="border-image"
-                src={`https://storage.googleapis.com/ranktogether-images/${auth.user.avatar}`} size='medium' />
+                src={`https://storage.googleapis.com/ranktogether-images/${user.avatar}`} size='medium' circular centered />
+            <Item.Description>
+                <Header
+                    as="h2"
+                    textAlign="center">
+                    {user.bio}
+                </Header>
+            </Item.Description>
+            {auth.user?.id === user.id ?
+                (<Modal
+                    closeIcon
+                    open={open}
+                    trigger={<Button
+                        secondary
+                        className="about-me-button">
+                        About Me
+                    </Button>}
+                    onClose={() => setOpen(!open)}
+                    onOpen={() => setOpen(!open)}
+                    centered>
+                    <Header icon="pencil alternate" content='About Me' />
+                    <Form onSubmit={addBio}>
+                        <TextArea
+                            type="text"
+                            name="bio"
+                            placeholder="Tell us about yourself"
+                            value={bio}
+                            onChange={(e) => setBio(e.target.value)} />
+                        <Input type="submit" className="button-margin" />
+                    </Form>
+                </Modal>) : null}
+            <>{auth.user?.id === user?.id ? null
+                : (<div>
+                    {showFollow() ?
+                        (<Button
+                            className="about-me-button"
+                            positive
+                            onClick={handleFollow}>
+                            👉 Follow
+                        </Button>)
+                        :
+                        (<Button
+                            className="about-me-button"
+                            negative
+                            onClick={handleUnfollow}>
+                            Unfollow
+                        </Button>)}
+                </div>)} </>
         </div>
     )
 }

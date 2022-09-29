@@ -11,6 +11,7 @@ import Create from './Components/Create';
 import Completed from "./Components/Completed";
 import Leaders from './Components/Leaders';
 import Profile from './Components/Profile';
+import OneBoardOptions from "./Components/OneBoardOptions";
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
           <Route path="/create" element={<Create />} />
           <Route path='/leaders' element={<Leaders />} />
           <Route path='/profile/:id' element={<Profile />} />
+          <Route path="/board/:id" element={<OneBoardOptions />} />
           <Route path='/login' element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

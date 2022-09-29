@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Image, Header, Button, Item, Form, TextArea, Input, Modal, Icon } from "semantic-ui-react"
+import { Image, Header, Button, Item, Form, TextArea, Input, Modal } from "semantic-ui-react"
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -7,7 +7,6 @@ function Profile() {
 
     const auth = useContext(AuthContext);
     const navigate = useNavigate();
-    const [isBioClicked, setIsBioClicked] = useState(false);
     const [bio, setBio] = useState("");
     const [user, setUser] = useState({});
     const [open, setOpen] = useState(false)

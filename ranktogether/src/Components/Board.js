@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { useNavigate } from "react-router-dom"
 import { Card, Image, Button } from "semantic-ui-react"
 
@@ -8,16 +8,28 @@ function Board({ board }) {
 
     function handleClickCreator(userID) {
         navigate(`/profile/${userID}`)
-      }
+    }
+
+    function handleClickBoard(boardID) {
+        navigate(`/board/${boardID}`)
+    }
 
     return (
         <Card className="card-board-scroll">
-            <Image src={`https://storage.googleapis.com/ranktogether-images/${board.options[0].option_image}`} wrapped ui={false} />
+            <Image
+                onClick={() => handleClickBoard(board.id)}
+                src={`https://storage.googleapis.com/ranktogether-images/${board.options[0].option_image}`}
+                wrapped ui={false} />
             <Card.Content>
                 <Card.Header>{board.title}</Card.Header>
                 <Card.Meta>
-                    <Button onClick={() => handleClickCreator(board.user.id)}>
-                        <span className='username'>{board.user.username}</span>
+                    <Button
+                        secondary
+                        onClick={() => handleClickCreator(board.user.id)}>
+                        <span
+                            className='username'>
+                            {board.user.username}
+                        </span>
                     </Button>
                 </Card.Meta>
                 <Card.Description>

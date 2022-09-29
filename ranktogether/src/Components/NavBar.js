@@ -12,7 +12,7 @@ function NavBar() {
     const auth = useContext(AuthContext);
 
     return (
-        <Menu className="nav" pointing secondary>
+        <Menu className="nav" inverted>
             <Menu.Item
                 name='home'
                 active={activeItem === 'home'}

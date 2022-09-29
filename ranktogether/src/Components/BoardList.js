@@ -1,6 +1,5 @@
 import React from "react";
-import { Card } from "semantic-ui-react";
-import Board from "./Board"
+import Board from "./Board";
 
 
 function BoardList({ boards, category }) {

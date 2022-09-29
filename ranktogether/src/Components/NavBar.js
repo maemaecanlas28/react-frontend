@@ -9,7 +9,7 @@ function NavBar() {
     const navigate = useNavigate();
     let location = useLocation();
     const [activeItem, setActiveItem] = useState("Home")
-    const { user } = useContext(AuthContext);
+    const auth = useContext(AuthContext);
 
     return (
         <Menu className="nav">
@@ -41,18 +41,19 @@ function NavBar() {
                 <Link to="/leaders"> Leaders </Link>
             </Menu.Item>
 
-            <Menu.Item
-                name='profile'
-                active={activeItem === 'profile'}
-                onClick={() => setActiveItem("Profile")}>
-                <Link to="/profile"> Profile </Link>
-            </Menu.Item>
-            {user ? (<Menu.Item
-                name='login'
-                active={activeItem === 'login'}
-                onClick={() => setActiveItem("Login")}>
-                <Link to="/login"> Login </Link>
-            </Menu.Item>) : null }
+            {auth.user ?
+                (<Menu.Item
+                    name='profile'
+                    active={activeItem === 'profile'}
+                    onClick={() => setActiveItem("Profile")}>
+                    <Link to={`/profile/${auth.user.id}`}> Profile </Link>
+                </Menu.Item>) :
+                (<Menu.Item
+                    name='login'
+                    active={activeItem === 'login'}
+                    onClick={() => setActiveItem("Login")}>
+                    <Link to="/login"> Login </Link>
+                </Menu.Item>)}
         </Menu>
     )
 }

@@ -11,8 +11,9 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  height: 25rem;
+  /* height: 25rem; */
   border-radius: 30%;
+  box-shadow: 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .background-purple {
@@ -28,17 +29,22 @@
 
 .ui.nav {
   margin: 1rem 12px;
+  border: solid black 3px
 }
 
 .ui.cards.board-scroll {
   width: 100%;
   overflow: auto;
   flex-wrap: nowrap;
-  background: black;
+  border: solid black 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: white;
 }
 
-.card-board-scroll {
+.ui.card.card-board-scroll {
   flex: 0 0 auto;
+  border: solid black 3px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .image-profile {

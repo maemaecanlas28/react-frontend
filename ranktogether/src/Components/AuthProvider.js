@@ -31,8 +31,12 @@ function AuthProvider ({ children }) {
     };
   
     let signout = async () => {
-        setUser(null);
-        localStorage.removeItem("user");
+        return fetch("/logout", {
+            method: "DELETE",
+        }).then(() => {
+            setUser(null);
+            localStorage.removeItem("user");
+        })
     };
   
     let value = { user, signin, signout };

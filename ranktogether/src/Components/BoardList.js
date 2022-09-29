@@ -9,11 +9,13 @@ function BoardList({ boards, category }) {
         .filter(board => {
             return board.category === category
         })
-        .map(board => {
+        // bring back to board.id and remove idx
+        .map((board, idx) => {
             return (
                 <Board
-                    key={board.id}
-                    board={board} />)
+                    key={idx}
+                    board={board} />
+        )
         })
 
 

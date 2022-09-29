@@ -9,7 +9,7 @@ function Home({ boards }) {
     const boardLists = categories
         .map(category => {
             return (
-                <>
+                <div key={category}>
                     <div className="header-margin">
                         <Header size='large'> {category} </Header>
                     </div>
@@ -18,7 +18,7 @@ function Home({ boards }) {
                             <BoardList category={category} boards={boards} />
                         </Card.Group>
                     </div>
-                </>
+                </div>
             )
         })
 

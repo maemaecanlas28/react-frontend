@@ -7,7 +7,7 @@ function Board({ board }) {
     let navigate = useNavigate()
 
     function handleClickCreator(userID) {
-        navigate(`/users/${userID}`)
+        navigate(`/profile/${userID}`)
       }
 
     return (

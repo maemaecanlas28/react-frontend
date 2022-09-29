@@ -24,6 +24,7 @@ function Login() {
         else {
           navigate(from, { replace: true });
         }
+        console.log(data)
       })
   }
 
@@ -49,7 +50,7 @@ function Login() {
             onChange={(e) => setPassword(e.target.value)}
             placeholder='Password' />
         </Form.Field>
-        <Button type='submit'> Submit </Button>
+        <Button type='submit'> Login </Button>
         <div>
           <Button style={{ marginTop: "10px" }} onClick={handleSignup}>Sign-up</Button>
         </div>

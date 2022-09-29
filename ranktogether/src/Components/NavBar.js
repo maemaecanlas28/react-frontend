@@ -12,7 +12,7 @@ function NavBar() {
     const auth = useContext(AuthContext);
 
     return (
-        <Menu className="nav">
+        <Menu className="nav" pointing secondary>
             <Menu.Item
                 name='home'
                 active={activeItem === 'home'}
@@ -45,13 +45,15 @@ function NavBar() {
                 (<Menu.Item
                     name='profile'
                     active={activeItem === 'profile'}
-                    onClick={() => setActiveItem("Profile")}>
+                    onClick={() => setActiveItem("Profile")}
+                    position="right">
                     <Link to={`/profile/${auth.user.id}`}> Profile </Link>
                 </Menu.Item>) :
                 (<Menu.Item
                     name='login'
                     active={activeItem === 'login'}
-                    onClick={() => setActiveItem("Login")}>
+                    onClick={() => setActiveItem("Login")}
+                    position="right">
                     <Link to="/login"> Login </Link>
                 </Menu.Item>)}
         </Menu>

@@ -11,7 +11,7 @@ function Create() {
     const [tags, setTags] = useState([])
 
     return (
-        <div>
+        <div className="create-form">
         <Form>
             <Form.Field>
                 <Input

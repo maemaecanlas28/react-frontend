@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Image, Header, Button, Item, Form, TextArea, Input, Modal } from "semantic-ui-react"
+import { Image, Header, Button, Item, Form, TextArea, Input, Modal, Icon } from "semantic-ui-react"
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -104,25 +104,41 @@ function Profile() {
 
     return (
         <div className="image-profile">
-            <Header size='huge' textAlign="center">{user.username}</Header>
-            {/* <Item.Meta>
-                <Header
-                    onClick={() => setIsBioClicked(!isBioClicked)}
-                    as='h3'
-                    textAlign="center">
-                    Bio:
-                </Header>
-            </Item.Meta> */}
+            {auth.user?.id === user.id ?
+                (<Button
+                    secondary
+                    onClick={handleLogout}
+                    className="logout-button">
+                    Logout
+                </Button>) : null}
+            <Header
+                as="h1"
+                textAlign="center">
+                {user.username}
+            </Header>
+            <Image
+                className="border-image"
+                src={`https://storage.googleapis.com/ranktogether-images/${user.avatar}`} size='medium' circular centered />
             <Item.Description>
-                {user.bio}
+                <Header
+                    as="h2"
+                    textAlign="center">
+                    {user.bio}
+                </Header>
             </Item.Description>
             {auth.user?.id === user.id ?
                 (<Modal
                     closeIcon
                     open={open}
-                    trigger={<Button align="center">Bio</Button>}
+                    trigger={<Button
+                        secondary
+                        className="about-me-button">
+                        About Me
+                    </Button>}
                     onClose={() => setOpen(!open)}
-                    onOpen={() => setOpen(!open)}>
+                    onOpen={() => setOpen(!open)}
+                    centered>
+                    <Header icon="pencil alternate" content='About Me' />
                     <Form onSubmit={addBio}>
                         <TextArea
                             type="text"
@@ -137,23 +153,19 @@ function Profile() {
                 : (<div>
                     {showFollow() ?
                         (<Button
+                            className="about-me-button"
                             positive
                             onClick={handleFollow}>
                             👉 Follow
                         </Button>)
                         :
                         (<Button
+                            className="about-me-button"
                             negative
                             onClick={handleUnfollow}>
                             Unfollow
                         </Button>)}
                 </div>)} </>
-            <Image
-                className="border-image"
-                src={`https://storage.googleapis.com/ranktogether-images/${user.avatar}`} size='medium' />
-            <Button onClick={handleLogout}>
-                Logout
-            </Button>
         </div>
     )
 }

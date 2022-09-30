@@ -149,3 +149,9 @@
   width: 100%;
   height: 300px;
 }
+
+.vote-button {
+  position: relative;
+  top: -295px;
+  right: -965px;
+}

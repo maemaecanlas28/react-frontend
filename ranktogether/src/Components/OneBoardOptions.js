@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom"
-import { Header, Grid, Image, Card, Dimmer, Loader } from "semantic-ui-react"
+import { Header, Grid, Button, Dimmer, Loader, Comment, Form } from "semantic-ui-react"
 import OptionsCards from "./OptionsCard";
 import update from 'immutability-helper'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import Comments from "./Comments";
 
 
 function OneBoardOptions() {
@@ -13,6 +14,7 @@ function OneBoardOptions() {
     const boardID = parseInt(params.id)
     const [board, setBoard] = useState(null)
     const [options, setOptions] = useState([]);
+    const [comments, setComments] = useState([])
 
     useEffect(() => {
         fetch(`/boards/${boardID}`)
@@ -20,6 +22,7 @@ function OneBoardOptions() {
             .then(data => {
                 setBoard(data)
                 setOptions(data.options)
+                setComments(data.comments)
             })
     }, [])
 
@@ -57,6 +60,13 @@ function OneBoardOptions() {
             )
         })
 
+    const commentsList = comments
+        .map((comment, idx) => {
+            return (
+                <Comments key={comment.id} comment={comment} idx={idx}/>
+            )
+        })
+
     return (
         <DndProvider backend={HTML5Backend}>
             <div>
@@ -74,6 +84,24 @@ function OneBoardOptions() {
                                 {optionsCards}
                             </Grid.Row>
                         </Grid></>)}
+            </div>
+            <Button
+                size="huge"
+                className="vote-button"
+                secondary>
+                Vote!
+            </Button>
+            <div>
+                <Comment.Group>
+                    <Header as='h3' dividing>
+                        Comments!
+                       {commentsList}
+                    </Header>
+                </Comment.Group>
+                <Form reply>
+                    <Form.TextArea />
+                    <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+                </Form>
             </div>
         </DndProvider>
     )

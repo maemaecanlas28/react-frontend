@@ -20,6 +20,7 @@ function Signup() {
         { key: 'Male', text: 'Male', value: 'Male' },
         { key: 'Female', text: 'Female', value: 'Female' },
         { key: 'Nonbinary', text: 'Nonbinary', value: 'Nonbinary' },
+        { key: "Prefer not to answer", text: "Prefer not to answer", value: "Prefer noy to answer"}
     ]
 
     function handleSelectedGender(event, data) {

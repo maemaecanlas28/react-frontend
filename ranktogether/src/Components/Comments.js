@@ -1,22 +1,32 @@
-import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom"
+import React, { useContext } from "react";
 import { Comment, Header, Form, Button } from "semantic-ui-react"
+import { AuthContext } from "../Context/AuthContext";
 
-function Comments({ comment, idx }) {
+function Comments({ comment, idx, removeComment, handleClickCreator }) {
+
+    const auth = useContext(AuthContext);
 
     return (
         <Comment>
-            {/* <Comment.Avatar src={`https://storage.googleapis.com/ranktogether-images/${comment.user.avatar}`} />
+            <Comment.Avatar src={`https://storage.googleapis.com/ranktogether-images/${comment.avatar}`} />
             <Comment.Content>
-                <Comment.Author as='a'>{comment.user.username}</Comment.Author>
+                <Comment.Author
+                    onClick={() => handleClickCreator(comment.user_id)} 
+                    as='a'>
+                    {comment.username}
+                </Comment.Author>
                 <Comment.Metadata>
-                    <div>Today at 5:42PM</div>
+                    <div>{comment.created_at}</div>
                 </Comment.Metadata>
                 <Comment.Text>{comment.message}</Comment.Text>
                 <Comment.Actions>
-                    <Comment.Action>Reply</Comment.Action>
+                    {auth.user?.id === comment.user_id ? 
+                        (<Button 
+                            onClick={() => removeComment(comment)}
+                            circular 
+                            icon='delete' />) : null }
                 </Comment.Actions>
-            </Comment.Content> */}
+            </Comment.Content>
         </Comment>
     )
 }

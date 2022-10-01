@@ -3,7 +3,7 @@ import RankTogether from "../Images/RankTogether.png"
 
 function Header() {
     return (
-        <div className="background-purple">
+        <div>
             <img
                 src={RankTogether}
                 alt="RankTogether GIF"

@@ -22,7 +22,7 @@
 }
 
 .background-purple {
-  background-color: rgb(127, 83, 172);
+  background-image: linear-gradient(rgb(127, 83, 172), rgb(91, 91, 220)) ;
   height: 100%;
 }
 
@@ -85,9 +85,9 @@
   top: -25px;
 }
 
-.about-me-button {
-  position: absolute;
-  left: 930px;
+.ui.button.button-center {
+  margin: 0 auto;
+  display: block;
 }
 
 .login-padding {
@@ -108,7 +108,7 @@
 .ui.grid.grid-margin {
   width: 50%;
   margin: 0 auto;
-  padding-bottom: 300px;
+  padding-bottom: 10px;
   justify-content: center;
 }
 
@@ -151,7 +151,31 @@
 }
 
 .vote-button {
-  position: relative;
-  top: -295px;
-  right: -965px;
+  margin: 0 auto;
+  width: 111px;
+  margin-bottom: 200px;
+}
+
+.comments-section {
+  width: 600px;
+  margin: 0 auto;
+  border: solid black 3px;
+  padding: 20px 20px 50px;
+}
+
+.ui.button.add-comment-button {
+  position: absolute;
+  right: 0px;
+}
+
+.app-content {
+  padding: 0px 20px 50px;
+}
+
+.creator-click {
+  cursor: pointer;
+}
+
+.total-votes {
+  text-align: center;
 }

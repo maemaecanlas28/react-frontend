@@ -17,7 +17,6 @@ function BoardList({ boards, category }) {
         )
         })
 
-
     return (
         <>
             {boardCards}

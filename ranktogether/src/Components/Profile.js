@@ -13,7 +13,7 @@ function Profile() {
 
     const params = useParams();
 
-    // grabbing user date for the profile page
+    // grabbing user data for the profile page
     useEffect(() => {
         if (auth.user?.id === parseInt(params.id)) {
             setUser(auth.user)
@@ -131,7 +131,7 @@ function Profile() {
                     open={open}
                     trigger={<Button
                         secondary
-                        className="about-me-button">
+                        className="button-center">
                         About Me
                     </Button>}
                     onClose={() => setOpen(!open)}
@@ -152,14 +152,14 @@ function Profile() {
                 : (<div>
                     {showFollow() ?
                         (<Button
-                            className="about-me-button"
+                            className="button-center"
                             positive
                             onClick={handleFollow}>
                             👉 Follow
                         </Button>)
                         :
                         (<Button
-                            className="about-me-button"
+                            className="button-center"
                             negative
                             onClick={handleUnfollow}>
                             Unfollow

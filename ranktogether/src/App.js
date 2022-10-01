@@ -37,16 +37,18 @@ function App() {
       <Header />
       <AuthProvider>
         <NavBar />
-        <Routes>
-          <Route path='/' element={<Home boards={boards} />} />
-          <Route path='/completed' element={<Completed />} />
-          <Route path="/create" element={<Create />} />
-          <Route path='/leaders' element={<Leaders />} />
-          <Route path='/profile/:id' element={<Profile />} />
-          <Route path="/board/:id" element={<OneBoardOptions />} />
-          <Route path='/login' element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
+        <div className="app-content">
+          <Routes>
+            <Route path='/' element={<Home boards={boards} />} />
+            <Route path='/completed' element={<Completed />} />
+            <Route path="/create" element={<Create />} />
+            <Route path='/leaders' element={<Leaders />} />
+            <Route path='/profile/:id' element={<Profile />} />
+            <Route path="/board/:id" element={<OneBoardOptions />} />
+            <Route path='/login' element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+          </Routes>
+        </div>
       </AuthProvider>
     </div>
   );

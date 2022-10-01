@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
-import { Grid, Card, Ref } from "semantic-ui-react"
+import { Grid, Card, Ref, Header } from "semantic-ui-react"
 import { DragTypes } from '../Types/DragTypes'
 import { useDrag, useDrop } from 'react-dnd'
 
-function OptionsCards({ option, idx, moveCard }) {
+function OptionsCards({ option, idx, moveCard, userVote }) {
 
 	const ref = useRef(null)
 	const [{ handlerId }, drop] = useDrop({
@@ -53,7 +53,9 @@ function OptionsCards({ option, idx, moveCard }) {
 			}
 
 			// Time to actually perform the action
-			moveCard(dragIndex, hoverIndex)
+			if (userVote == null) {
+				moveCard(dragIndex, hoverIndex)
+			}
 
 			// Note: we're mutating the monitor item here!
 			// Generally it's better to avoid mutations,
@@ -66,7 +68,7 @@ function OptionsCards({ option, idx, moveCard }) {
 	const [{ isDragging }, drag] = useDrag({
 		type: DragTypes.CARD,
 		item: () => {
-			return { id: option.id, index:idx }
+			return { id: option.id, index: idx }
 		},
 		collect: (monitor) => ({
 			isDragging: monitor.isDragging(),
@@ -76,11 +78,28 @@ function OptionsCards({ option, idx, moveCard }) {
 	const opacity = isDragging ? 0 : 1
 	drag(drop(ref))
 
+	function getRankByUser() {
+		if (userVote != null) {
+			const { rankings } = userVote
+			const optionIdx = rankings.indexOf(option.id)
+			return optionIdx + 1
+		}
+	}
+
 	return (
 		<Ref innerRef={ref}>
 			<Grid.Column
 				data-handler-id={handlerId}>
 				<Card centered className="card-margin">
+					{userVote != null ?
+						(<div className="one-option-vote">
+							<Header
+								textAlign="center"
+								as='h2'
+								icon='plug'>
+								Your rank: {getRankByUser()}
+							</Header>
+						</div>) : null}
 					<div className="card-img-container">
 						<img
 							className="card-img"

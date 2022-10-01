@@ -95,8 +95,7 @@ function OptionsCards({ option, idx, moveCard, userVote }) {
 						(<div className="one-option-vote">
 							<Header
 								textAlign="center"
-								as='h2'
-								icon='plug'>
+								as='h2'>
 								Your rank: {getRankByUser()}
 							</Header>
 						</div>) : null}

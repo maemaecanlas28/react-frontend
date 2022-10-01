@@ -1,11 +1,12 @@
 .login-form {
-  width: 500px;
+  width: 30%;
   height: auto;
   border: 3px solid;
   margin-left: auto;
   margin-right: auto;
   padding: 15px;
   background-color: whitesmoke;
+  border-radius: 25px;
 }
 
 #main-header {
@@ -54,8 +55,14 @@
 
 .image-profile {
   position: relative;
-  margin: 50px 20px 100px 60px;
+  margin: 0 auto;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 600px;
+  border: solid black 3px;
+  border-radius: 5%;
+  background-color: whitesmoke;
 }
 
 .ui.medium.image.border-image {
@@ -77,8 +84,8 @@
 
 .logout-button {
   position: absolute;
-  right: 10px;
-  top: -25px;
+  right: -285px;
+  top: 0px;
 }
 
 .ui.button.button-center {
@@ -87,7 +94,7 @@
 }
 
 .login-padding {
-  padding-bottom: 500px;
+  padding-bottom: 200px;
 }
 
 .board-option-name {
@@ -157,6 +164,7 @@
   margin: 0 auto;
   border: solid black 3px;
   padding: 20px 20px 50px;
+  border-radius: 25px;
 }
 
 .ui.button.add-comment-button {
@@ -165,7 +173,7 @@
 }
 
 .app-content {
-  padding: 0px 20px 50px;
+  padding: 0px 20px 100px;
 }
 
 .creator-click {
@@ -182,8 +190,9 @@
   border: 3px solid;
   margin-left: auto;
   margin-right: auto;
-  padding: 15px;
+  padding: 20px;
   background-color: whitesmoke;
+  border-radius: 25px;
 }
 
 .options-container {
@@ -195,4 +204,18 @@
   position: absolute;
   right: 5px;
   top: 5px;
+}
+
+.create-board {
+  border: solid black 3px;
+  margin: 0 auto;
+  display: block;
+}
+
+.avatar-border {
+  border: solid black 3px;
+}
+
+.ui.header.profile-form {
+  display: block;
 }

@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Button, Form, Input, TextArea, FormField, Icon, Grid, Card, Header } from "semantic-ui-react"
+import { useNavigate } from "react-router-dom"
+import CreateBoard from "../Images/CreateBoard.png"
 
 function Create() {
+
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [options, setOptions] = useState([])
-    const [imageTitle, setImageTitle] = useState("")
-    const [categories, setCategories] = useState([])
+    const [category, setCategory] = useState("")
     const [endDate, setEndDate] = useState(minDate())
-    const [tags, setTags] = useState([])
+    const [errors, setErrors] = useState("")
+    const [tags, setTags] = useState("")
+    const navigate = useNavigate();
 
     function fileChange(e) {
         // setOptions(e.target.files[0]);
@@ -41,7 +45,7 @@ function Create() {
         const currentDate = new Date();
         currentDate.setDate(currentDate.getDate() + 1);
         const day = ('0' + currentDate.getDate()).slice(-2)
-        const month = ('0' + (currentDate.getMonth()+1)).slice(-2)
+        const month = ('0' + (currentDate.getMonth() + 1)).slice(-2)
         const year = currentDate.getFullYear()
         return `${year}-${month}-${day}`
     }
@@ -50,15 +54,53 @@ function Create() {
         const currentDate = new Date();
         currentDate.setDate(currentDate.getDate() + 14);
         const day = ('0' + currentDate.getDate()).slice(-2)
-        const month = ('0' + (currentDate.getMonth()+1)).slice(-2)
+        const month = ('0' + (currentDate.getMonth() + 1)).slice(-2)
         const year = currentDate.getFullYear()
         return `${year}-${month}-${day}`
     }
 
+    function handleCreateBoard(e) {
+        e.preventDefault();
+        if (options.length < 2) {
+            alert("Not enough options, min 2");
+            return;
+        }
+        setErrors([]);
+        const formData = new FormData();
+        formData.append("title", title);
+        formData.append("description", description)
+        // formData.append("options", options)
+        formData.append("category", category)
+        formData.append("end_date", endDate)
+        const tagsArray = tags.split(",").map(tag => {
+            formData.append("tags[]", tag.trim())
+        })
+        options.map((option, idx) => {
+            formData.append(`options[]name`, option.name)
+            formData.append(`options[]option_image`, option.option_image)
+        })
+        fetch("/boards", {
+            method: "POST",
+            headers: {
+                "Accept": "application/json",
+            },
+            body: formData,
+        })
+            .then(data => data.json())
+            .then(data => {
+                navigate(`/board/${data.id}`)
+            })
+    }
+
     return (
         <div className="create-form">
-            <Form>
+            <img
+                src={CreateBoard}
+                alt="CreateBoard"
+                className="create-board" />
+            <Form onSubmit={handleCreateBoard}>
                 <Form.Field>
+                    <label>Title</label>
                     <Input
                         type="text"
                         name="title"
@@ -67,14 +109,13 @@ function Create() {
                         onChange={(e) => setTitle(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
+                    <label>Description</label>
                     <TextArea
                         type="text"
                         name="description"
                         placeholder="Description"
                         value={description}
-                        onChange={(e) => setDescription(e.target.value)}>
-                        Description:
-                    </TextArea>
+                        onChange={(e) => setDescription(e.target.value)} />
                 </Form.Field>
                 <div className="options-container">
                     <Grid>
@@ -114,7 +155,7 @@ function Create() {
                     </Grid>
                 </div>
                 <FormField>
-                    <label>Upload your options (min. 1 option - max. 6 options)</label>
+                    <label>Upload your options (min. 2 options - max. 6 options)</label>
                     <Button
                         as="label"
                         htmlFor="file"
@@ -133,30 +174,22 @@ function Create() {
                         onChange={fileChange} />
                 </FormField>
                 <Form.Field>
-                    <Input
-                        type="text"
-                        name="imageTitle"
-                        placeholder="Image Title"
-                        value={imageTitle}
-                        onChange={(e) => setImageTitle(e.target.value)} />
-                </Form.Field>
-                <Form.Field>
+                    <label>Category</label>
                     <Input
                         type="text"
                         name="category"
-                        placeholder="Categories"
-                        value={categories}
-                        onChange={(e) => setCategories(e.target.value)} />
+                        placeholder="Category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
+                    <label>Tags</label>
                     <TextArea
                         type="text"
                         name="tags"
                         placeholder="Tags"
                         value={tags}
-                        onChange={(e) => setTags(e.target.value)}>
-                        Tags:
-                    </TextArea>
+                        onChange={(e) => setTags(e.target.value)} />
                 </Form.Field>
                 <Form.Field>
                     <label>End Date</label>

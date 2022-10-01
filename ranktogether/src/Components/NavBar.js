@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../Context/AuthContext"
 import { useLocation } from 'react-router-dom';
-import { Menu } from "semantic-ui-react"
+import { Menu, Icon } from "semantic-ui-react"
 
 function NavBar() {
 
@@ -47,14 +47,18 @@ function NavBar() {
                     active={activeItem === 'profile'}
                     onClick={() => setActiveItem("Profile")}
                     position="right">
-                    <Link to={`/profile/${auth.user.id}`}> Profile </Link>
+                    <Link to={`/profile/${auth.user.id}`}>
+                        <Icon name="user circle" />
+                    </Link>
                 </Menu.Item>) :
                 (<Menu.Item
                     name='login'
                     active={activeItem === 'login'}
                     onClick={() => setActiveItem("Login")}
                     position="right">
-                    <Link to="/login"> Login </Link>
+                    <Link to="/login">
+                        Login
+                    </Link>
                 </Menu.Item>)}
         </Menu>
     )

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Image, Header, Button, Item, Form, TextArea, Input, Modal } from "semantic-ui-react"
+import { Image, Header, Button, Item, Form, TextArea, Input, Modal, Icon } from "semantic-ui-react"
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom"
 
@@ -102,69 +102,79 @@ function Profile() {
     }
 
     return (
-        <div className="image-profile">
-            {auth.user?.id === user.id ?
-                (<Button
-                    secondary
-                    onClick={handleLogout}
-                    className="logout-button">
-                    Logout
-                </Button>) : null}
+        <div>
             <Header
-                as="h1"
-                textAlign="center">
-                {user.username}
+                className="profile-form" 
+                as='h2' 
+                icon>
+                <Icon
+                    name='user circle' />
+                My Profile
             </Header>
-            <Image
-                className="border-image"
-                src={`https://storage.googleapis.com/ranktogether-images/${user.avatar}`} size='medium' circular centered />
-            <Item.Description>
-                <Header
-                    as="h2"
-                    textAlign="center">
-                    {user.bio}
-                </Header>
-            </Item.Description>
-            {auth.user?.id === user.id ?
-                (<Modal
-                    closeIcon
-                    open={open}
-                    trigger={<Button
+            <div className="image-profile">
+                {auth.user?.id === user.id ?
+                    (<Button
                         secondary
-                        className="button-center">
-                        About Me
-                    </Button>}
-                    onClose={() => setOpen(!open)}
-                    onOpen={() => setOpen(!open)}
-                    centered>
-                    <Header icon="pencil alternate" content='About Me' />
-                    <Form onSubmit={addBio}>
-                        <TextArea
-                            type="text"
-                            name="bio"
-                            placeholder="Tell us about yourself"
-                            value={bio}
-                            onChange={(e) => setBio(e.target.value)} />
-                        <Input type="submit" className="button-margin" />
-                    </Form>
-                </Modal>) : null}
-            <>{auth.user?.id === user?.id ? null
-                : (<div>
-                    {showFollow() ?
-                        (<Button
-                            className="button-center"
-                            positive
-                            onClick={handleFollow}>
-                            👉 Follow
-                        </Button>)
-                        :
-                        (<Button
-                            className="button-center"
-                            negative
-                            onClick={handleUnfollow}>
-                            Unfollow
-                        </Button>)}
-                </div>)} </>
+                        onClick={handleLogout}
+                        className="logout-button">
+                        Logout
+                    </Button>) : null}
+                <Header
+                    as="h1"
+                    textAlign="center">
+                    {user.username}
+                </Header>
+                <Image
+                    className="border-image"
+                    src={`https://storage.googleapis.com/ranktogether-images/${user.avatar}`} size='medium' circular centered />
+                <Item.Description>
+                    <Header
+                        as="h2"
+                        textAlign="center">
+                        {user.bio}
+                    </Header>
+                </Item.Description>
+                {auth.user?.id === user.id ?
+                    (<Modal
+                        closeIcon
+                        open={open}
+                        trigger={<Button
+                            secondary
+                            className="button-center">
+                            About Me
+                        </Button>}
+                        onClose={() => setOpen(!open)}
+                        onOpen={() => setOpen(!open)}
+                        centered>
+                        <Header icon="pencil alternate" content='About Me' />
+                        <Form onSubmit={addBio}>
+                            <TextArea
+                                type="text"
+                                name="bio"
+                                placeholder="Tell us about yourself"
+                                value={bio}
+                                onChange={(e) => setBio(e.target.value)} />
+                            <Input type="submit" className="button-margin" />
+                        </Form>
+                    </Modal>) : null}
+                <>{auth.user?.id === user?.id ? null
+                    : (<div>
+                        {showFollow() ?
+                            (<Button
+                                className="button-center"
+                                positive
+                                onClick={handleFollow}>
+                                👉 Follow
+                            </Button>)
+                            :
+                            (<Button
+                                className="button-center"
+                                negative
+                                onClick={handleUnfollow}>
+                                Unfollow
+                            </Button>)}
+                    </div>)} </>
+            </div>
         </div>
     )
 }

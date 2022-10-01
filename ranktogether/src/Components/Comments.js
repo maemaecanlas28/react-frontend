@@ -8,23 +8,27 @@ function Comments({ comment, idx, removeComment, handleClickCreator }) {
 
     return (
         <Comment>
-            <Comment.Avatar src={`https://storage.googleapis.com/ranktogether-images/${comment.avatar}`} />
+            <Comment.Avatar
+                className="avatar-border"
+                src={`https://storage.googleapis.com/ranktogether-images/${comment.avatar}`} />
             <Comment.Content>
                 <Comment.Author
-                    onClick={() => handleClickCreator(comment.user_id)} 
+                    onClick={() => handleClickCreator(comment.user_id)}
                     as='a'>
                     {comment.username}
                 </Comment.Author>
                 <Comment.Metadata>
-                    <div>{comment.created_at}</div>
+                    <div>
+                        {comment.created_at}
+                    </div>
                 </Comment.Metadata>
                 <Comment.Text>{comment.message}</Comment.Text>
                 <Comment.Actions>
-                    {auth.user?.id === comment.user_id ? 
-                        (<Button 
+                    {auth.user?.id === comment.user_id ?
+                        (<Button
                             onClick={() => removeComment(comment)}
-                            circular 
-                            icon='delete' />) : null }
+                            circular
+                            icon='delete' />) : null}
                 </Comment.Actions>
             </Comment.Content>
         </Comment>

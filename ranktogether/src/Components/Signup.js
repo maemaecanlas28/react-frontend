@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"
-import { Form, Button, Message, Dropdown, FormField, Icon } from "semantic-ui-react"
+import { Form, Button, Message, Dropdown, FormField, Icon, Header } from "semantic-ui-react"
 
 function Signup() {
     const [name, setName] = useState("")
@@ -20,7 +20,7 @@ function Signup() {
         { key: 'Male', text: 'Male', value: 'Male' },
         { key: 'Female', text: 'Female', value: 'Female' },
         { key: 'Nonbinary', text: 'Nonbinary', value: 'Nonbinary' },
-        { key: "Prefer not to answer", text: "Prefer not to answer", value: "Prefer noy to answer"}
+        { key: "Prefer not to answer", text: "Prefer not to answer", value: "Prefer noy to answer" }
     ]
 
     function handleSelectedGender(event, data) {
@@ -63,6 +63,13 @@ function Signup() {
     }
     return (
         <div className="login-padding">
+            <Header 
+                as='h2' 
+                icon
+                textAlign="center">
+                <Icon name='user' />
+                Create an Account!
+            </Header>
             <div className="login-form">
                 <Form onSubmit={handleSubmit} errors={errors.length == 0 ? "false" : "true"}>
                     <Form.Field>

@@ -1,7 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Image, Header, Button, Item, Form, TextArea, Input, Modal, Icon } from "semantic-ui-react"
+import { Image, Header, Button, Item, Form, TextArea, Input, Modal, Icon, Menu, Segment } from "semantic-ui-react"
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom"
+import UserList from "./UserList"
+import ProfileBoardList from "./ProfileBoardList"
 
 function Profile() {
 
@@ -10,6 +12,7 @@ function Profile() {
     const [bio, setBio] = useState("");
     const [user, setUser] = useState({});
     const [open, setOpen] = useState(false)
+    const [activeItem, setActiveItem] = useState("Created")
 
     const params = useParams();
 
@@ -25,7 +28,7 @@ function Profile() {
                     setUser(data)
                 })
         }
-    }, [])
+    }, [params.id])
 
     const addBio = (e) => {
         e.preventDefault()
@@ -101,11 +104,24 @@ function Profile() {
         return result == null
     }
 
+    function showTabContent() {
+        switch (activeItem) {
+            case "Created":
+                return (<ProfileBoardList />)
+            case "Ranked":
+                return (<ProfileBoardList />)
+            case "Followers":
+                return (<UserList users={user.followers}/>)
+            case "Following":
+                return (<UserList users={user.followings}/>)
+        }
+    }
+
     return (
         <div>
             <Header
-                className="profile-form" 
-                as='h2' 
+                className="profile-form"
+                as='h2'
                 icon>
                 <Icon
                     name='user circle' />
@@ -174,6 +190,30 @@ function Profile() {
                                 Unfollow
                             </Button>)}
                     </div>)} </>
+                <div>
+                    <Menu pointing secondary>
+                        <Menu.Item
+                            name='Created'
+                            active={activeItem === 'Created'}
+                            onClick={() => setActiveItem("Created")} />
+                        <Menu.Item
+                            name='Ranked'
+                            active={activeItem === 'Ranked'}
+                            onClick={() => setActiveItem("Ranked")} />
+                        <Menu.Item
+                            name='Followers'
+                            active={activeItem === 'Followers'}
+                            onClick={() => setActiveItem("Followers")} />
+                        <Menu.Item
+                            name='Following'
+                            active={activeItem === 'Following'}
+                            onClick={() => setActiveItem("Following")} />
+                    </Menu>
+
+                    <Segment>
+                        {showTabContent()}
+                    </Segment>
+                </div>
             </div>
         </div>
     )

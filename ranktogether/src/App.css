@@ -229,3 +229,16 @@
   height: 300px;
   object-fit: contain;
 }
+
+.followers-list {
+  margin: 0 auto;
+  width: 20%;
+  border: solid black 3px;
+  border-radius: 20%;
+  padding: 20px;
+  background-color: whitesmoke;
+}
+
+.followers-header {
+  cursor: pointer;
+}

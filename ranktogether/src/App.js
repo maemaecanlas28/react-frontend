@@ -23,12 +23,12 @@ function App() {
       .then(data => data.json())
       .then(data => {
         const dataCopy = JSON.stringify(data);
-        const hack = [...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy)];
-        hack[2].category = "Movies";
-        hack[3].category = "Movies";
-        hack[4].category = "Animals";
-        hack[5].category = "Animals";
-        setBoards(hack)
+        // const hack = [...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy)];
+        // hack[2].category = "Movies";
+        // hack[3].category = "Movies";
+        // hack[4].category = "Animals";
+        // hack[5].category = "Animals";
+        setBoards(data)
       })
   }, [])
 

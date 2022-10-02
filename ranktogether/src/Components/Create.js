@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form, Input, TextArea, FormField, Icon, Grid, Card, Header } from "semantic-ui-react"
+import { Button, Form, Input, TextArea, FormField, Icon, Grid, Card, Dropdown } from "semantic-ui-react"
 import { useNavigate } from "react-router-dom"
 import CreateBoard from "../Images/CreateBoard.png"
+import { CategoryTypes } from "../Types/CategoryTypes";
 
 function Create() {
 
@@ -58,6 +59,14 @@ function Create() {
         const year = currentDate.getFullYear()
         return `${year}-${month}-${day}`
     }
+
+    function handleSelectedCategory (event, data) {
+        setCategory(data.value)
+      }
+
+      const categoryOptions = Object.keys(CategoryTypes).map(key => {
+        return { key, value: CategoryTypes[key], text: CategoryTypes[key] }
+      })
 
     function handleCreateBoard(e) {
         e.preventDefault();
@@ -175,12 +184,12 @@ function Create() {
                 </FormField>
                 <Form.Field>
                     <label>Category</label>
-                    <Input
-                        type="text"
-                        name="category"
-                        placeholder="Category"
-                        value={category}
-                        onChange={(e) => setCategory(e.target.value)} />
+                    <Dropdown
+                        placeholder='Select Category'
+                        fluid search selection
+                        onChange={(e, data) => handleSelectedCategory(e, data)}
+                        options={categoryOptions}
+                        value={category}/>
                 </Form.Field>
                 <Form.Field>
                     <label>Tags</label>

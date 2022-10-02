@@ -234,10 +234,12 @@ function OneBoardOptions() {
                         {commentsList}
                     </Header>
                 </Comment.Group>
-                <Form reply>
-                    {isUserLoggedOut() ? null : (<Form.TextArea
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)} />)}
+                <Form>
+                    {isUserLoggedOut() ? null :
+                        (<Form.TextArea
+                            className="comment-box"
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)} />)}
                     <Button
                         onClick={handleNewComment}
                         // className="add-comment-button"

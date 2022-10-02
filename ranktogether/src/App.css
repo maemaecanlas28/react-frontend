@@ -165,6 +165,7 @@
   border: solid black 3px;
   padding: 20px 20px 50px;
   border-radius: 25px;
+  background-color: whitesmoke;
 }
 
 .ui.button.add-comment-button {
@@ -218,4 +219,13 @@
 
 .ui.header.profile-form {
   display: block;
+}
+
+.comment-box {
+  border: solid black 3px;
+}
+
+.card-size-homepage {
+  height: 300px;
+  object-fit: contain;
 }

@@ -1,12 +1,16 @@
 import React from "react";
 import BoardList from "./BoardList"
 import { Card, Header } from "semantic-ui-react"
+import { CategoryTypes } from "../Types/CategoryTypes";
 
 function Home({ boards }) {
 
-    const categories = ["Animals", "eSports", "Movies"]
+    const categoryOptions = Object.keys(CategoryTypes).map(key => {
+        return CategoryTypes[key]
+    })
 
-    const boardLists = categories
+    const boardLists = categoryOptions
+        .sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()))
         .map(category => {
             return (
                 <div

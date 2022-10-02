@@ -14,9 +14,14 @@ function Board({ board }) {
         navigate(`/board/${boardID}`)
     }
 
+    const endDate = new Date(board.end_date)
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const formattedDate = endDate.toLocaleDateString('en-US', options)
+
     return (
         <Card className="card-board-scroll">
-            <Image
+            <img
+                className="card-size-homepage"
                 onClick={() => handleClickBoard(board.id)}
                 src={`https://storage.googleapis.com/ranktogether-images/${board.options[0].option_image}`}
                 wrapped ui={false} />
@@ -33,7 +38,7 @@ function Board({ board }) {
                     </Button>
                 </Card.Meta>
                 <Card.Description>
-                    {board.end_date}
+                    End Date: {formattedDate}
                 </Card.Description>
             </Card.Content>
         </Card>

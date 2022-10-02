@@ -6,6 +6,10 @@ function Comments({ comment, idx, removeComment, handleClickCreator }) {
 
     const auth = useContext(AuthContext);
 
+    const commentDate = new Date(comment.created_at)
+    const options = { weekday: 'long', year: 'numeric', month: 'numeric', day: 'numeric' };
+    const formattedDate = commentDate.toLocaleDateString('en-US', options)
+
     return (
         <Comment>
             <Comment.Avatar
@@ -19,7 +23,7 @@ function Comments({ comment, idx, removeComment, handleClickCreator }) {
                 </Comment.Author>
                 <Comment.Metadata>
                     <div>
-                        {comment.created_at}
+                        {formattedDate}
                     </div>
                 </Comment.Metadata>
                 <Comment.Text>{comment.message}</Comment.Text>

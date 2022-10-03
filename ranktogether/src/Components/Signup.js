@@ -63,15 +63,17 @@ function Signup() {
     }
     return (
         <div className="login-padding">
-            <Header 
-                as='h2' 
+            <Header
+                as='h2'
                 icon
                 textAlign="center">
                 <Icon name='user' />
                 Create an Account!
             </Header>
             <div className="login-form">
-                <Form onSubmit={handleSubmit} errors={errors.length == 0 ? "false" : "true"}>
+                <Form
+                    onSubmit={handleSubmit}
+                    errors={errors.length == 0 ? "false" : "true"}>
                     <Form.Field>
                         <label>Name</label>
                         <input

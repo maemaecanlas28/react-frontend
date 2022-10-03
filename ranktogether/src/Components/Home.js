@@ -3,7 +3,7 @@ import BoardList from "./BoardList"
 import { Card, Header } from "semantic-ui-react"
 import { CategoryTypes } from "../Types/CategoryTypes";
 
-function Home({ boards }) {
+function Home({ boards, page }) {
 
     const categoryOptions = Object.keys(CategoryTypes).map(key => {
         return CategoryTypes[key]
@@ -25,7 +25,8 @@ function Home({ boards }) {
                             className="board-scroll">
                             <BoardList
                                 category={category}
-                                boards={boards} />
+                                boards={boards}
+                                page={page} />
                         </Card.Group>
                     </div>
                 </div>

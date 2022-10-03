@@ -8,7 +8,6 @@ import Signup from './Components/Signup';
 import Login from "./Components/Login"
 import { Route, Routes } from "react-router-dom"
 import Create from './Components/Create';
-import Completed from "./Components/Completed";
 import Leaders from './Components/Leaders';
 import Profile from './Components/Profile';
 import OneBoardOptions from "./Components/OneBoardOptions";
@@ -39,8 +38,8 @@ function App() {
         <NavBar />
         <div className="app-content">
           <Routes>
-            <Route path='/' element={<Home boards={boards} />} />
-            <Route path='/completed' element={<Completed />} />
+            <Route path='/' element={<Home boards={boards} page="home" />} />
+            <Route path='/completed' element={<Home boards={boards} page="completed"/>} />
             <Route path="/create" element={<Create />} />
             <Route path='/leaders' element={<Leaders />} />
             <Route path='/profile/:id' element={<Profile />} />

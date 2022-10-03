@@ -24,7 +24,8 @@ function Board({ board }) {
                 className="card-size-homepage"
                 onClick={() => handleClickBoard(board.id)}
                 src={`https://storage.googleapis.com/ranktogether-images/${board.options[0].option_image}`}
-                wrapped ui={false} />
+                wrapped="true" 
+                ui="false" />
             <Card.Content>
                 <Card.Header>{board.title}</Card.Header>
                 <Card.Meta>

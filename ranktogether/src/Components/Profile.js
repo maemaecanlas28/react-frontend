@@ -107,9 +107,9 @@ function Profile() {
     function showTabContent() {
         switch (activeItem) {
             case "Created":
-                return (<ProfileBoardList />)
+                return (<ProfileBoardList user={user} tab="created"/>)
             case "Ranked":
-                return (<ProfileBoardList />)
+                return (<ProfileBoardList user={user} tab="ranked"/>)
             case "Followers":
                 return (<UserList users={user.followers}/>)
             case "Following":

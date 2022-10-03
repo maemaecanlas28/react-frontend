@@ -1,6 +1,6 @@
 import React from "react"
 import { useNavigate } from "react-router-dom"
-import { Card, Button } from "semantic-ui-react"
+import { Card, Header } from "semantic-ui-react"
 
 function Board({ board }) {
 
@@ -24,19 +24,17 @@ function Board({ board }) {
                 className="card-size-homepage"
                 onClick={() => handleClickBoard(board.id)}
                 src={`https://storage.googleapis.com/ranktogether-images/${board.options[0].option_image}`}
-                wrapped="true" 
+                wrapped="true"
                 ui="false" />
             <Card.Content>
                 <Card.Header>{board.title}</Card.Header>
                 <Card.Meta>
-                    <Button
-                        secondary
-                        onClick={() => handleClickCreator(board.user.id)}>
-                        <span
-                            className='username'>
-                            {board.user.username}
-                        </span>
-                    </Button>
+                    <Header
+                        as="h4"
+                        onClick={() => handleClickCreator(board.user.id)}
+                        className='username'>
+                        Creator: {board.user.username}
+                    </Header>
                 </Card.Meta>
                 <Card.Description>
                     End Date: {formattedDate}

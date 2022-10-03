@@ -84,8 +84,8 @@
 
 .logout-button {
   position: absolute;
-  right: -285px;
-  top: 0px;
+  right: -305px;
+  top: -126px;
 }
 
 .ui.button.button-center {
@@ -241,4 +241,12 @@
 
 .followers-header {
   cursor: pointer;
+}
+
+.ui.header.header-padding {
+  padding: 15px;
+}
+
+.profile-navbar {
+  padding: 20px;
 }

@@ -107,26 +107,27 @@ function Profile() {
     function showTabContent() {
         switch (activeItem) {
             case "Created":
-                return (<ProfileBoardList user={user} tab="created"/>)
+                return (<ProfileBoardList user={user} tab="created" />)
             case "Ranked":
-                return (<ProfileBoardList user={user} tab="ranked"/>)
+                return (<ProfileBoardList user={user} tab="ranked" />)
             case "Followers":
-                return (<UserList users={user.followers}/>)
+                return (<UserList users={user.followers} />)
             case "Following":
-                return (<UserList users={user.followings}/>)
+                return (<UserList users={user.followings} />)
         }
     }
 
     return (
         <div>
-            <Header
-                className="profile-form"
-                as='h2'
-                icon>
-                <Icon
-                    name='user circle' />
-                My Profile
-            </Header>
+            {auth.user?.id === user.id ?
+                (<Header
+                    className="profile-form"
+                    as='h2'
+                    icon>
+                    <Icon
+                        name='user circle' />
+                    My Profile
+                </Header>) : null}
             <div className="image-profile">
                 {auth.user?.id === user.id ?
                     (<Button
@@ -136,6 +137,7 @@ function Profile() {
                         Logout
                     </Button>) : null}
                 <Header
+                    className="header-padding"
                     as="h1"
                     textAlign="center">
                     {user.username}
@@ -145,6 +147,7 @@ function Profile() {
                     src={`https://storage.googleapis.com/ranktogether-images/${user.avatar}`} size='medium' circular centered />
                 <Item.Description>
                     <Header
+                        className="header-padding"
                         as="h2"
                         textAlign="center">
                         {user.bio}
@@ -190,8 +193,10 @@ function Profile() {
                                 Unfollow
                             </Button>)}
                     </div>)} </>
-                <div>
-                    <Menu pointing secondary>
+                <div className="profile-navbar">
+                    <Menu 
+                        pointing 
+                        secondary>
                         <Menu.Item
                             name='Created'
                             active={activeItem === 'Created'}

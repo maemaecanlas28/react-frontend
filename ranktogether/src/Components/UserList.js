@@ -13,6 +13,7 @@ function UserList({ users }) {
 
     const listOfFollowers = users.map(user => {
         return (
+            <>
             <List key={user.user_id}>
                 <List.Item>
                     <Header 
@@ -26,6 +27,7 @@ function UserList({ users }) {
                     </Header>
                 </List.Item>
             </List>
+            </>
         )
     })
     return (

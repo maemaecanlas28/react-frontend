@@ -13,7 +13,6 @@ function Profile() {
     const [user, setUser] = useState({});
     const [open, setOpen] = useState(false)
     const [activeItem, setActiveItem] = useState("Created")
-
     const params = useParams();
 
     // grabbing user data for the profile page

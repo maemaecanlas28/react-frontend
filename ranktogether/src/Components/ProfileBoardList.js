@@ -7,7 +7,6 @@ function ProfileBoardList({ user, tab }) {
     const [boards, setBoards] = useState([])
 
 
-
     useEffect(() => {
         if (user != null) {
             const url = tab === "created" ? `/boards/user/${user.id}` : `/boards/ranked/${user.id}`

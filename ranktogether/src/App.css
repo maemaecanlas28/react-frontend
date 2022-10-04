@@ -23,7 +23,7 @@
 }
 
 .background-purple {
-  background-image: linear-gradient(rgb(127, 83, 172), rgb(91, 91, 220)) ;
+  background-image: linear-gradient(rgb(127, 83, 172), rgb(91, 91, 220));
   height: 100%;
 }
 
@@ -208,7 +208,7 @@
 }
 
 .create-board {
-  border: solid black 3px;
+  border: dotted black 10px;
   margin: 0 auto;
   display: block;
 }
@@ -249,4 +249,53 @@
 
 .profile-navbar {
   padding: 20px;
+}
+
+.top-rank-image {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.rest-rank-image {
+  display: flex;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+.rank-image-size {
+  width: 300px;
+  height: auto;
+  border-radius: 50%;
+  border: solid black 5px;
+  margin-bottom: 20px;
+}
+
+.header-topvoters {
+  border: solid black 3px;
+  background-color: whitesmoke;
+}
+
+.ribbon {
+  width: 120px;
+  position: absolute;
+  bottom: 50px;
+  right: -20px;
+}
+
+.ribbon-position {
+  position: relative;
+  cursor: pointer;
+}
+
+.border-list {
+  border: dotted black 10px;
+  margin: 0 auto;
+  display: block;
+  padding: 5px;
+}
+
+.pointer-cursor {
+  cursor: pointer;
 }

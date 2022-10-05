@@ -26,7 +26,7 @@ function OneBoardOptions() {
     }
 
     useEffect(() => {
-        fetch(`/boards/${boardID}`)
+        fetch(`/api/boards/${boardID}`)
             .then(data => data.json())
             .then(data => {
                 setBoard(data)
@@ -84,7 +84,7 @@ function OneBoardOptions() {
                 "rankings": voteIDs
             })
         }
-        fetch("/votes", postReqObj)
+        fetch("/api/votes", postReqObj)
             .then((res) => res.json())
             .then((data) => {
                 auth.setUser(data.user)
@@ -107,7 +107,7 @@ function OneBoardOptions() {
                 "board_id": board.id
             })
         }
-        fetch("/comments", postReqObj)
+        fetch("/api/comments", postReqObj)
             .then((res) => res.json())
             .then((data) => {
                 setComments([...comments, data])
@@ -142,7 +142,7 @@ function OneBoardOptions() {
                 "Accepts": "application/json",
             }
         }
-        fetch(`/comments/${comment.id}`, deleteReqObj)
+        fetch(`/api/comments/${comment.id}`, deleteReqObj)
             .then(() => {
                 const newList = [...comments]
                 let listingIndex = 0

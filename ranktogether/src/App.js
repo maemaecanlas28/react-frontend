@@ -18,7 +18,7 @@ function App() {
   const [boards, setBoards] = useState([])
 
   useEffect(() => {
-    fetch("/boards")
+    fetch("/api/boards")
       .then(data => data.json())
       .then(data => {
         const dataCopy = JSON.stringify(data);

@@ -6,7 +6,7 @@ function AuthProvider({ children }) {
     let [user, setUser] = useState(null);
 
     useEffect(() => {
-        fetch("/me")
+        fetch("/api/me")
             .then((r) => r.json())
             .then((data) => {
                 if (!data.errors) {
@@ -29,7 +29,7 @@ function AuthProvider({ children }) {
             }),
         }
         // do fetch to call /login in api
-        return fetch("/login", configObj)
+        return fetch("/api/login", configObj)
             .then((r) => r.json())
             .then((data) => {
                 if (!data.error) {
@@ -41,7 +41,7 @@ function AuthProvider({ children }) {
     };
 
     let signout = async () => {
-        return fetch("/logout", {
+        return fetch("/api/logout", {
             method: "DELETE",
         }).then(() => {
             setUser(null);

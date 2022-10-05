@@ -88,7 +88,7 @@ function Create() {
             formData.append(`options[]name`, option.name)
             formData.append(`options[]option_image`, option.option_image)
         })
-        fetch("/boards", {
+        fetch("/api/boards", {
             method: "POST",
             headers: {
                 "Accept": "application/json",

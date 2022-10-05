@@ -13,7 +13,7 @@ function LeaderList ({ group }) {
     }
 
     useEffect(() => {
-        const url = group === "rankers" ? "/votes/toprankers" : "/votes/topcreators"
+        const url = group === "rankers" ? "/api/votes/toprankers" : "/api/votes/topcreators"
         fetch(url)
             .then(data => data.json())
             .then(data => {

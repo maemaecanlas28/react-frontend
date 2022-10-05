@@ -21,7 +21,7 @@ function Profile() {
             setUser(auth.user)
         }
         else {
-            fetch(`/users/${params.id}`)
+            fetch(`/api/users/${params.id}`)
                 .then(data => data.json())
                 .then(data => {
                     setUser(data)
@@ -41,7 +41,7 @@ function Profile() {
                 "bio": bio,
             })
         }
-        fetch(`/users/${user.id}`, patchReqObj)
+        fetch(`/api/users/${user.id}`, patchReqObj)
             .then((res) => res.json())
             .then((data) => {
                 setUser(data)
@@ -62,7 +62,7 @@ function Profile() {
                 "user_id": user.id,
             })
         }
-        fetch("/follow", postReqObj)
+        fetch("/api/follow", postReqObj)
             .then(data => data.json())
             .then(data => {
                 const userCopy = JSON.parse(JSON.stringify(auth.user))
@@ -83,7 +83,7 @@ function Profile() {
                 "user_id": user.id,
             })
         }
-        fetch("/unfollow", deleteReqObj)
+        fetch("/api/unfollow", deleteReqObj)
             .then(() => {
                 const userCopy = JSON.parse(JSON.stringify(auth.user))
                 userCopy.followings = userCopy.followings.filter(data => {

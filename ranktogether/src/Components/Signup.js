@@ -45,7 +45,7 @@ function Signup() {
         formData.append("password", passwordConfirmation)
         formData.append("gender", gender)
         formData.append("date_of_birth", birthdate)
-        fetch("/signup", {
+        fetch("/api/signup", {
             method: "POST",
             headers: {
                 "Accept": "application/json",

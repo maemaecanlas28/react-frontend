@@ -8,7 +8,7 @@ function ProfileBoardList({ user, tab }) {
 
 
     useEffect(() => {
-        if (user != null) {
+        if (user?.id != null) {
             const url = tab === "created" ? `/api/boards/user/${user.id}` : `/api/boards/ranked/${user.id}`
             fetch(url)
                 .then(data => data.json())

@@ -69,6 +69,7 @@ function Create() {
       })
 
     function handleCreateBoard(e) {
+        console.log("getting called")
         e.preventDefault();
         if (options.length < 2) {
             alert("Not enough options, min 2");
@@ -107,7 +108,8 @@ function Create() {
                 src={CreateBoard}
                 alt="CreateBoard"
                 className="create-board" />
-            <Form onSubmit={handleCreateBoard}>
+            <Form 
+                onSubmit={handleCreateBoard}>
                 <Form.Field>
                     <label>Title</label>
                     <Input
@@ -138,6 +140,7 @@ function Create() {
                                             <div className="card-img-container">
                                                 <div className="option-delete-btn">
                                                     <Button
+                                                        type="button"
                                                         circular
                                                         icon='delete'
                                                         onClick={(e) => removeOption(e, idx)} />

@@ -27,7 +27,7 @@ function Profile() {
                     setUser(data)
                 })
         }
-    }, [params.id])
+    }, [params.id, auth.user])
 
     const addBio = (e) => {
         e.preventDefault()
@@ -66,7 +66,8 @@ function Profile() {
             .then(data => data.json())
             .then(data => {
                 const userCopy = JSON.parse(JSON.stringify(auth.user))
-                userCopy.followings.push(data)
+                const {user: followedUser} = data; 
+                userCopy.followings.push({user_id: followedUser.id, username: followedUser.username, avatar: followedUser.avatar});
                 auth.setUser(userCopy)
             })
     }
@@ -103,6 +104,10 @@ function Profile() {
         return result == null
     }
 
+    function hideLoggedInActions () {
+        return auth.user == null || auth.user.id === user.id;
+    }
+
     function showTabContent() {
         switch (activeItem) {
             case "Created":
@@ -118,7 +123,7 @@ function Profile() {
 
     return (
         <div>
-            {auth.user?.id === user.id ?
+            {auth.user?.id === user?.id ?
                 (<Header
                     className="profile-form"
                     as='h2'
@@ -128,7 +133,7 @@ function Profile() {
                     My Profile
                 </Header>) : null}
             <div className="image-profile">
-                {auth.user?.id === user.id ?
+                {auth.user?.id === user?.id ?
                     (<Button
                         secondary
                         onClick={handleLogout}
@@ -175,7 +180,7 @@ function Profile() {
                             <Input type="submit" className="button-margin" />
                         </Form>
                     </Modal>) : null}
-                <>{auth.user?.id === user?.id ? null
+                <>{hideLoggedInActions() ? null
                     : (<div>
                         {showFollow() ?
                             (<Button
@@ -193,8 +198,8 @@ function Profile() {
                             </Button>)}
                     </div>)} </>
                 <div className="profile-navbar">
-                    <Menu 
-                        pointing 
+                    <Menu
+                        pointing
                         secondary>
                         <Menu.Item
                             name='Created'

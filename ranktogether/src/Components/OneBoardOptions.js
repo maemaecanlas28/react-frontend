@@ -228,7 +228,15 @@ function OneBoardOptions() {
                         </Grid></>)}
             </div>
             <div className="vote-button">
-                {isBoardCompleted(board) ? <h1> Board is Completed! </h1> :
+                {isBoardCompleted(board) ?
+                    (<div
+                        className="completed-board-container">
+                        <Header
+                            textAlign="centered"
+                            as="h1">
+                            Board is Completed!
+                        </Header>
+                    </div>) :
                     (
                         <>
                             {!hasUserVoted() ?

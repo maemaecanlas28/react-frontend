@@ -154,8 +154,8 @@
 }
 
 .vote-button {
+  text-align: center;
   margin: 0 auto;
-  width: 111px;
   margin-bottom: 200px;
 }
 
@@ -322,4 +322,11 @@
 .error-message {
   width: 500px;
   display: block;
+}
+
+.completed-board-container {
+  background-color: whitesmoke;
+  border: dotted black 5px;
+  margin: 0 auto;
+  width: 300px;
 }

@@ -3,7 +3,7 @@ import { Grid, Card, Ref, Header } from "semantic-ui-react"
 import { DragTypes } from '../Types/DragTypes'
 import { useDrag, useDrop } from 'react-dnd'
 
-function OptionsCards({ option, idx, moveCard, userVote }) {
+function OptionsCards({ option, idx, moveCard, userVote, isBoardCompleted }) {
 
 	const ref = useRef(null)
 	const [{ handlerId }, drop] = useDrop({
@@ -53,7 +53,7 @@ function OptionsCards({ option, idx, moveCard, userVote }) {
 			}
 
 			// Time to actually perform the action
-			if (userVote == null) {
+			if (userVote == null && !isBoardCompleted) {
 				moveCard(dragIndex, hoverIndex)
 			}
 
@@ -90,7 +90,9 @@ function OptionsCards({ option, idx, moveCard, userVote }) {
 		<Ref innerRef={ref}>
 			<Grid.Column
 				data-handler-id={handlerId}>
-				<Card centered className="card-margin">
+				<Card 
+					centered 
+					className={isBoardCompleted ? "card-margin" : "card-margin cursor-grab"}>
 					{userVote != null ?
 						(<div className="one-option-vote">
 							<Header

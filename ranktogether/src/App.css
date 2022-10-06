@@ -299,3 +299,13 @@
 .pointer-cursor {
   cursor: pointer;
 }
+
+.avatar-button-container {
+  margin: 6px auto;
+  width: 300px;
+  text-align: center;
+}
+
+.cursor-grab {
+  cursor: grab;
+}

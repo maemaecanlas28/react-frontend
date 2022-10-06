@@ -115,6 +115,14 @@ function OneBoardOptions() {
             })
     }
 
+    function isBoardCompleted() {
+        if (board) {
+            const curDate = new Date().getTime();
+            const endDate = new Date(board.end_date).getTime();
+            return endDate < curDate
+        }
+    }
+
     function hasUserVoted() {
         const userVote = auth.user?.votes.find(vote => {
             return board?.id === vote.board_id
@@ -165,6 +173,7 @@ function OneBoardOptions() {
                     key={option.id}
                     option={option}
                     idx={idx}
+                    isBoardCompleted={isBoardCompleted()}
                     moveCard={moveCard}
                     userVote={getUserVote()} />
             )
@@ -219,13 +228,20 @@ function OneBoardOptions() {
                         </Grid></>)}
             </div>
             <div className="vote-button">
-                {!hasUserVoted() ?
-                    (<Button
-                        onClick={handleVote}
-                        size="huge"
-                        secondary>
-                        {isUserLoggedOut() ? "Login to vote!" : "Vote!"}
-                    </Button>) : null}
+                {isBoardCompleted() ? <h1> Board is Completed! </h1> :
+                    (
+                        <>
+                            {!hasUserVoted() ?
+                                (<Button
+                                    onClick={handleVote}
+                                    size="huge"
+                                    secondary>
+                                    {isUserLoggedOut() ? "Login to vote!" : "Vote!"}
+                                </Button>) : null}
+                        </>
+                    )
+                }
+
             </div>
             <div className="comments-section">
                 <Comment.Group>
@@ -242,7 +258,6 @@ function OneBoardOptions() {
                             onChange={(e) => setMessage(e.target.value)} />)}
                     <Button
                         onClick={handleNewComment}
-                        // className="add-comment-button"
                         content={isUserLoggedOut() ? "Login to comment" : 'Add Comment'}
                         labelPosition='left'
                         icon='edit'

@@ -66,8 +66,8 @@ function Profile() {
             .then(data => data.json())
             .then(data => {
                 const userCopy = JSON.parse(JSON.stringify(auth.user))
-                const {user: followedUser} = data; 
-                userCopy.followings.push({user_id: followedUser.id, username: followedUser.username, avatar: followedUser.avatar});
+                const { user: followedUser } = data;
+                userCopy.followings.push({ user_id: followedUser.id, username: followedUser.username, avatar: followedUser.avatar });
                 auth.setUser(userCopy)
             })
     }
@@ -104,7 +104,26 @@ function Profile() {
         return result == null
     }
 
-    function hideLoggedInActions () {
+    function avatarChange(e) {
+        if (e.target.files.length < 1) {
+            return;
+        }
+        const formData = new FormData();
+        formData.append("avatar", e.target.files[0]);
+        fetch(`/api/users/${auth.user.id}`, {
+            method: "PATCH",
+            headers: {
+                "Accept": "application/json",
+            },
+            body: formData,
+        })
+        .then(data => data.json())
+        .then(data => {
+            auth.setUser(data);
+        })
+    }
+
+    function hideLoggedInActions() {
         return auth.user == null || auth.user.id === user.id;
     }
 
@@ -158,28 +177,48 @@ function Profile() {
                     </Header>
                 </Item.Description>
                 {auth.user?.id === user.id ?
-                    (<Modal
-                        closeIcon
-                        open={open}
-                        trigger={<Button
-                            secondary
-                            className="button-center">
-                            About Me
-                        </Button>}
-                        onClose={() => setOpen(!open)}
-                        onOpen={() => setOpen(!open)}
-                        centered>
-                        <Header icon="pencil alternate" content='About Me' />
-                        <Form onSubmit={addBio}>
-                            <TextArea
-                                type="text"
-                                name="bio"
-                                placeholder="Tell us about yourself"
-                                value={bio}
-                                onChange={(e) => setBio(e.target.value)} />
-                            <Input type="submit" className="button-margin" />
-                        </Form>
-                    </Modal>) : null}
+                    (<div>
+                        <Modal
+                            closeIcon
+                            open={open}
+                            trigger=
+                            {<Button
+                                secondary
+                                className="button-center">
+                                About Me
+                            </Button>}
+                            onClose={() => setOpen(!open)}
+                            onOpen={() => setOpen(!open)}
+                            centered>
+                            <Header icon="pencil alternate" content='About Me' />
+                            <Form onSubmit={addBio}>
+                                <TextArea
+                                    type="text"
+                                    name="bio"
+                                    placeholder="Tell us about yourself"
+                                    value={bio}
+                                    onChange={(e) => setBio(e.target.value)} />
+                                <Input type="submit" className="button-margin" />
+                            </Form>
+                        </Modal>
+                        <div 
+                            className="avatar-button-container">
+                            <Button
+                                secondary
+                                as="label"
+                                htmlFor="file"
+                                type="button">
+                                <Button.Content>
+                                    Choose an Avatar
+                                </Button.Content>
+                            </Button>
+                            <input
+                                type="file"
+                                id="file"
+                                hidden
+                                onChange={avatarChange} />
+                        </div>
+                    </div>) : null}
                 <>{hideLoggedInActions() ? null
                     : (<div>
                         {showFollow() ?

@@ -22,11 +22,6 @@ function App() {
       .then(data => data.json())
       .then(data => {
         const dataCopy = JSON.stringify(data);
-        // const hack = [...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy), ...JSON.parse(dataCopy)];
-        // hack[2].category = "Movies";
-        // hack[3].category = "Movies";
-        // hack[4].category = "Animals";
-        // hack[5].category = "Animals";
         setBoards(data)
       })
   }, [])
@@ -39,8 +34,13 @@ function App() {
         <div className="app-content">
           <Routes>
             <Route path='/' element={<Home boards={boards} page="home" />} />
-            <Route path='/completed' element={<Home boards={boards} page="completed"/>} />
-            <Route path="/create" element={<Create />} />
+            <Route path='/completed' element={<Home boards={boards} page="completed" />} />
+            <Route
+              path="/create"
+              element={
+                <RequireAuth>
+                  <Create />
+                </RequireAuth>} />
             <Route path='/leaders' element={<Leaders />} />
             <Route path='/profile/:id' element={<Profile />} />
             <Route path="/board/:id" element={<OneBoardOptions />} />

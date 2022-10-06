@@ -11,11 +11,15 @@ import Create from './Components/Create';
 import Leaders from './Components/Leaders';
 import Profile from './Components/Profile';
 import OneBoardOptions from "./Components/OneBoardOptions";
+import { Message } from "semantic-ui-react"
+import { ErrorContext } from "./Context/ErrorContext"
 
 
 function App() {
 
   const [boards, setBoards] = useState([])
+  const [isErrorShown, setIsErrorShown] = useState(false);
+  const [errorList, setErrorList] = useState([])
 
   useEffect(() => {
     fetch("/api/boards")
@@ -26,28 +30,46 @@ function App() {
       })
   }, [])
 
+  function handleShowError () {
+    setIsErrorShown(true)
+    setTimeout(() => {
+      setIsErrorShown(false)
+    }, 5000)
+  }
+
   return (
     <div className='background-purple'>
       <Header />
       <AuthProvider>
         <NavBar />
-        <div className="app-content">
-          <Routes>
-            <Route path='/' element={<Home boards={boards} page="home" />} />
-            <Route path='/completed' element={<Home boards={boards} page="completed" />} />
-            <Route
-              path="/create"
-              element={
-                <RequireAuth>
-                  <Create />
-                </RequireAuth>} />
-            <Route path='/leaders' element={<Leaders />} />
-            <Route path='/profile/:id' element={<Profile />} />
-            <Route path="/board/:id" element={<OneBoardOptions />} />
-            <Route path='/login' element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-          </Routes>
-        </div>
+        <ErrorContext.Provider
+          value={{ isErrorShown, errorList, handleShowError, setErrorList }}>
+          {isErrorShown ? (<div
+            className="error-message-container">
+            <Message
+              className="error-message"
+              error
+              header='There was some errors with your submission'
+              list={errorList} />
+          </div>) : null}
+          <div className="app-content">
+            <Routes>
+              <Route path='/' element={<Home boards={boards} page="home" />} />
+              <Route path='/completed' element={<Home boards={boards} page="completed" />} />
+              <Route
+                path="/create"
+                element={
+                  <RequireAuth>
+                    <Create />
+                  </RequireAuth>} />
+              <Route path='/leaders' element={<Leaders />} />
+              <Route path='/profile/:id' element={<Profile />} />
+              <Route path="/board/:id" element={<OneBoardOptions />} />
+              <Route path='/login' element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+            </Routes>
+          </div>
+        </ErrorContext.Provider>
       </AuthProvider>
     </div>
   );

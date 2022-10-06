@@ -309,3 +309,17 @@
 .cursor-grab {
   cursor: grab;
 }
+
+.error-message-container {
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  bottom: -40px;
+}
+
+.error-message {
+  width: 500px;
+  display: block;
+}

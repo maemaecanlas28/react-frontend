@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Form } from "semantic-ui-react"
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import { ErrorContext } from "../Context/ErrorContext";
 
 function Login() {
 
@@ -10,7 +11,7 @@ function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const auth = useContext(AuthContext);
-  const [error, setError] = useState("")
+  const errorObj = useContext(ErrorContext)
 
   let from = location.state?.from?.pathname || "/";
 
@@ -19,12 +20,12 @@ function Login() {
     auth.signin(username, password)
       .then((data) => {
         if (data.error) {
-          setError(data.error)
+          errorObj.setErrorList([data.error])
+          errorObj.handleShowError()
         }
         else {
           navigate(from, { replace: true });
         }
-        console.log(data)
       })
   }
 

@@ -30,7 +30,7 @@ function OneBoardOptions() {
             .then(data => data.json())
             .then(data => {
                 setBoard(data)
-                if (hasUserVoted()) {
+                if (hasUserVoted() || isBoardCompleted(data)) {
                     data.options = data.options.sort((optionA, optionB) => {
                         return optionB.score - optionA.score
                     })
@@ -115,10 +115,10 @@ function OneBoardOptions() {
             })
     }
 
-    function isBoardCompleted() {
-        if (board) {
+    function isBoardCompleted(theBoard) {
+        if (theBoard) {
             const curDate = new Date().getTime();
-            const endDate = new Date(board.end_date).getTime();
+            const endDate = new Date(theBoard.end_date).getTime();
             return endDate < curDate
         }
     }
@@ -173,7 +173,7 @@ function OneBoardOptions() {
                     key={option.id}
                     option={option}
                     idx={idx}
-                    isBoardCompleted={isBoardCompleted()}
+                    isBoardCompleted={isBoardCompleted(board)}
                     moveCard={moveCard}
                     userVote={getUserVote()} />
             )
@@ -228,7 +228,7 @@ function OneBoardOptions() {
                         </Grid></>)}
             </div>
             <div className="vote-button">
-                {isBoardCompleted() ? <h1> Board is Completed! </h1> :
+                {isBoardCompleted(board) ? <h1> Board is Completed! </h1> :
                     (
                         <>
                             {!hasUserVoted() ?

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom"
 import { Form, Button, Message, Dropdown, FormField, Icon, Header } from "semantic-ui-react"
+import { ErrorContext } from "../Context/ErrorContext";
 
 function Signup() {
     const [name, setName] = useState("")
@@ -13,6 +14,7 @@ function Signup() {
     const [errors, setErrors] = useState("")
     const [avatarImage, setAvatarImage] = useState(null)
     const [isLoading, setIsLoading] = useState(false);
+    const errorObj = useContext(ErrorContext)
 
     const navigate = useNavigate();
 
@@ -37,7 +39,9 @@ function Signup() {
         setErrors([]);
         setIsLoading(true);
         const formData = new FormData();
-        formData.append("avatar", avatarImage);
+        if (avatarImage != null) {
+            formData.append("avatar", avatarImage);
+        }
         formData.append("name", name)
         formData.append("username", username)
         formData.append("email", email)
@@ -57,7 +61,10 @@ function Signup() {
                 if (r.ok) {
                     r.json().then(() => navigate("/login"));
                 } else {
-                    r.json().then((err) => setErrors(err.errors));
+                    r.json().then((err) => {
+                        errorObj.setErrorList(err.errors)
+                        errorObj.handleShowError()
+                    })
                 }
             });
     }
